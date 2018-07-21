@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HeTeMuLu Creator Ver.1.20β2">
+    <script src="lib/bowser.min.js"></script>
+    <script src="lib/webgl-detect.js"></script>
+    <script src="lib/file-detect.js"></script>
+    <script src="lib/localstorage-detect.js"></script>
+    <script src="lib/browser-detect.js"></script>
+    <title>Scratch 3.0 Available?</title>
+</head>
+
+<body>
+<h1>Scratch 3.0 Available? Checker</h1>
+<noscript><h2>Result: <img src="res/ng.png" alt="NG" width="30" height="30">NG</h2><div>because you disabled JavaScript.</div></noscript><div style="display:none;" id="showbyjs">
+<h2>Result: <img src="res/ng.png" alt="NG" width="30" height="30" id="ngimg_all"><span id="ngstr_all">NG</span></h2>
+<h3 id="browser_stat">Browser <img src="res/ng.png" alt="NG" width="20" height="20" id="ngimg_browser"><span id="ngstr_browser">NG</span></h3>
+<div>Supported Browser:<span id="supported_browser"></span></div>
+<h3>JavaScript <img src="res/ok.png" alt="OK" width="20" height="20">OK</h3>
+<h3>Canvas <img src="res/ng.png" alt="NG" width="20" height="20" id="ngimg_canvas"><span id="ngstr_canvas">NG</span></h3>
+<h3>WebGL <img src="res/ng.png" alt="NG" width="20" height="20" id="ngimg_webgl"><span id="ngstr_webgl">NG</span></h3>
+<div>This is used to draw the stage.</div>
+<h3>LocalStorage <img src="res/ng.png" alt="NG" width="20" height="20" id="ngimg_ls"><span id="ngstr_ls">NG</span></h3>
+<h3>File API <img src="res/ng.png" alt="NG" width="20" height="20" id="ngimg_fileapi"><span id="ngstr_fileapi">NG</span></h3>
+
+</div><script>
+function setOK(code) {
+    var elemImg=document.getElementById("ngimg_" + code);
+    elemImg.src = "res/ok.png";
+    elemImg.alt = "OK";
+    document.getElementById("ngstr_" + code).innerText = "OK";
+    return;
+}
+window.onload=function(){
+    document.getElementById("showbyjs").style.display="block";
+    var score = 1;
+    var bres = BrowserDetector;
+    if (bres == "okay") {
+        setOK("browser");
+        score++;
+    } else {
+        document.getElementById("browser_stat").innerHTML += ("<div>" + EMD[bres] + "</div>");
+    }
+    if (LSDetector) {
+        setOK("ls");
+        score++;
+    }
+    if (FileAPIDetector){
+        setOK("fileapi");
+        score++;
+    }
+    if (WebGLDetector.canvas) {
+        setOK("canvas");
+        score++;
+    }
+    if (WebGLDetector.webgl) {
+        setOK("webgl");
+        score++;
+    }
+    if (score == 6) {
+        setOK("all");
+    }
+    var sbl=document.getElementById("supported_browser");
+    if (bowser.windows) sbl.innerText = "Firefox, Chrome, Edge";
+    if (bowser.mac) sbl.innerText = "Firefox, Chrome, Safari";
+    if (bowser.android) sbl.innerText = "Chrome";
+    if (bowser.ios) sbl.innerText = "Safari";
+};
+</script></body>
+
+</html>
